@@ -1,17 +1,25 @@
 // Imports
 const express = require('express');
+const mongoose = require('mongoose');
 
 // Constant declarations
 const app = express();
+const db = mongoose.connect('mongodb://localhost/usersAPI');
 const loginRouter = express.Router();
 
-// Define port ***3000***
+// Import models
+const user = require('../models/userModel');
+
+// Define port ***4000***
 const port = process.env.PORT || 4000;
 
 loginRouter.route('/users').get((req, res) => {
-  const response = { hello: 'This is my api!'};
-
-  res.json(response);
+  user.find((err, users) => {
+    if(err) {
+      return res.send(err);
+    }
+    return res.json(users);
+  });
 });
 
 app.use('/api', loginRouter);

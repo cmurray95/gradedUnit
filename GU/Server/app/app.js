@@ -1,34 +1,37 @@
 // Imports
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+// Import models
+const User = require('../models/userModel');
+
+// Routes go here. Default path is '../routes/<routeName>
+const userRouter = require('../routes/userRouter')(User);
 
 // Constant declarations
 const app = express();
-const db = mongoose.connect('mongodb://localhost/usersAPI');
-const loginRouter = express.Router();
 
-// Import models
-const user = require('../models/userModel');
+// Check for test mode enabled
+if(process.env.ENV ===  'Test'){
+  console.log('Test environment');
+  const db = mongoose.connect('mongodb://localhost/usersAPI_Test');
+} else {
+  console.log('Deployment environment');
+  const db = mongoose.connect('mongodb://localhost/usersAPI');
+}
 
 // Define port ***4000***
 const port = process.env.PORT || 4000;
 
-loginRouter.route('/users').get((req, res) => {
-  user.find((err, users) => {
-    if(err) {
-      return res.send(err);
-    }
-    return res.json(users);
-  });
-});
+// Instanstiate app object 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use('/api', userRouter);
 
-app.use('/api', loginRouter);
-
-
-app.get('/', (req, res) => {
-  res.send('Welcome!');
-});
-
-app.listen(port, () => {
+// Start API server
+app.server = app.listen(port, () => {
   console.log('running on port ' + port);
 });
+
+module.exports = app;

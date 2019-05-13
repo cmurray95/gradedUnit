@@ -16,8 +16,7 @@ const router = express.Router();
  // Create new user
  router.post('/signup', (req, res, next) => {
    let user = new User({
-     forename: req.body.forename,
-     surname: req.body.surname,
+     name: req.body.name,
      email: req.body.email,
      username: req.body.username,
      password: req.body.password
@@ -58,8 +57,7 @@ const router = express.Router();
           token: `Bearer ${token}`,
           user: {
             id: user.__id,
-            forename: user.forename, 
-            surname: user.surname,
+            name: user.name, 
             username: user.username,
             email: user.email
           }
@@ -121,8 +119,8 @@ const router = express.Router();
 //     const {user} = req;
 //       user.username = req.body.username;
 //       user.password = req.body.password;
-//       user.forename = req.body.forename;
-//       user.surname = req.body.surname;
+//       user.name = req.body.name;
+//       user.name = req.body.name;
 //       req.user.save((err) => {
 //         if(err) {
 //           return res.send(err);

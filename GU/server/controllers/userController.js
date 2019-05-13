@@ -4,7 +4,7 @@ function userController(User) {
   function post(req, res) {
     const user = new User(req.body);
     // Submit 400 error if username and password are not submitted
-    if(!req.body.login.username || !req.body.login.password){
+    if(!req.body.username || !req.body.password){
       res.status(400);
       return res.send("Username and Password are required!")
     }

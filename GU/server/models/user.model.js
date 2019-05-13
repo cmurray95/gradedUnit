@@ -8,8 +8,7 @@ const {Schema} = mongoose;
 
 // Define db model
 const userModel = new Schema({
-  forename: {type: String, required: 'Field must not be blank!'},
-  surname: {type: String, required: 'Field must not be blank!'},
+  name: {type: String, required: 'Field must not be blank!'},
   email: {type: String, required: 'Field must not be blank', unique: true},
   username: { type: String, required: 'Field must not be blank', unique: true },
   password: { type: String, required: 'Password can\'t be empty'},
@@ -37,7 +36,6 @@ module.exports.getUserByUsername = function(username, callback){
 
 // Create new user
 module.exports.createUser = function(user, callback){
-  console.log(user);
   //Hash password and assign to user 
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(user.password, salt, (err, hash) => {

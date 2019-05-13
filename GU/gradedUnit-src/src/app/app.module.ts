@@ -11,6 +11,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { DashComponent } from './components/dash/dash.component';
+import { FormsModule } from '@angular/forms';
+import {ValidateService} from './services/validate.service';
+import {FlashMessagesModule} from 'angular2-flash-messages';
+import {AuthService} from './services/auth.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,14 +26,17 @@ import { DashComponent } from './components/dash/dash.component';
     ProfileComponent,
     HomeComponent,
     FeedComponent,
-    DashComponent
+    DashComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    FlashMessagesModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

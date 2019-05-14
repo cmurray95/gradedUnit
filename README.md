@@ -1,4 +1,4 @@
-# gradedUnit
+# HND Graded Unit - Pet rating application.
 
 # Files for marking
 Everything in Server folder and everything under /src/app in gradedUnit-src are to be assessed.

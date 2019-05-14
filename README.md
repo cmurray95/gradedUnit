@@ -4,7 +4,7 @@
 Everything in Server folder and everything under /src/app in gradedUnit-src are to be assessed.
 
 # Install guide
-Ensure that nodeJS and MongoDB server are installed on system: https://nodejs.org/ https://www.mongodb.com/download-center/community.
+Ensure that <a href="https://nodejs.org/">NodeJS</a> and <a href="https://www.mongodb.com/download-center/community">MongoDB server</a> are installed on system.
 From the Server folder run npm install followed by npm start.
 In a second terminal, run the same commands from within gradedUnit-src.
 

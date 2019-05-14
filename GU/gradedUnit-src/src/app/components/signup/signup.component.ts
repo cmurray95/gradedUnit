@@ -51,7 +51,8 @@ export class SignupComponent implements OnInit {
     // Register user
     this.authService.signUp(user).subscribe(data  => {
       if (data.success) {
-        this.flashMsg.show('Account created. You may now sign up!', {cssClass: 'alert-success', timeout: 4000});
+        console.log(data);
+        this.flashMsg.show('Account created. You may now sign in!', {cssClass: 'alert-success', timeout: 4000});
         // Redirect
         this.router.navigate(['/login']);
       } else {

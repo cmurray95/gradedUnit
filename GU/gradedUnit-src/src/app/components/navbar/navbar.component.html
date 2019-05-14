@@ -1,3 +1,8 @@
+<!--
+  The following makes use of angular directives.
+  This allows certain DOM elements to be loaded
+  only if conditions are met.
+-->
 <div class="container">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="">Graded Unit</a>
@@ -7,12 +12,26 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+              <a class="nav-link" [routerLink]="['/dash']">Home</a>
+            </li>
+      </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+        </li>
+        <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+            <a class="nav-link" [routerLink]="['/upload']">Upload</a>
+          </li>
+        <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" [routerLink]="['/login']">Login</a>
         </li>
-        <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" [routerLink]="['/signup']">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="onLogout()" href="#">Logout</a>
         </li>
       </ul>
     </div>

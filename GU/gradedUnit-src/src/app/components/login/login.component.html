@@ -1,3 +1,24 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 mx-auto">
+    <h2 class="page-header text-center">Login</h2>
+    <form (submit)="onLoginSubmit()" class="">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" placeholder="Enter Username" [(ngModel)]="username" name="username" class="form-control" required pattern="[a-zA-Z0-9]+">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password"  placeholder="Enter Password" [(ngModel)]="password" name="password" class="form-control" required pattern=".{6,}">
+      </div>
+      <div class="text-center">
+      <input type="submit" class="btn btn-primary" value="Submit">
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <p>Created by Craig Murray.</p>
+  <p>Code for this application can be found <a href='http://github.com/cmurray95/gradedUnit'>here.</a> The included readme provides local installation guidelines.</p>
+</div>

@@ -24,6 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from './guards/auth.guard';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 // Simple method for retrieving user ID token
 export function tokenGetter() {
@@ -41,7 +42,8 @@ export function tokenGetter() {
     FeedComponent,
     DashComponent,
     FileSelectDirective,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,7 @@
+/** APPLICATION ROOT
+ *  IMPORTS, DECLARATIONS, SERVICES ETC. GO HERE
+ */
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -15,7 +19,16 @@ import { FormsModule } from '@angular/forms';
 import {ValidateService} from './services/validate.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthService} from './services/auth.service';
+import { JwtModule } from '@auth0/angular-jwt';
 import {HttpClientModule} from '@angular/common/http';
+import {AuthGuard} from './guards/auth.guard';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+
+// Simple method for retrieving user ID token
+export function tokenGetter() {
+  return localStorage.getItem('id_token');
+}
 
 @NgModule({
   declarations: [
@@ -27,6 +40,8 @@ import {HttpClientModule} from '@angular/common/http';
     HomeComponent,
     FeedComponent,
     DashComponent,
+    FileSelectDirective,
+    ImageUploaderComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +51,7 @@ import {HttpClientModule} from '@angular/common/http';
     FlashMessagesModule.forRoot(),
     HttpClientModule
   ],
-  providers: [ValidateService, AuthService],
+  providers: [ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

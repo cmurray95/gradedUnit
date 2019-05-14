@@ -69,12 +69,52 @@ const router = express.Router();
   )})
 });
 
+ // Update data
+ router.patch('/update', (req, res, next) => {
+    const {user} = req;
+
+    // Prevents manual setting of user ID
+    if(req.body._id) {
+      delete req.body._id;
+    }
+
+    // Retrieve array of key-value pairs from requested object
+    // then edit each entry if it exists
+    Object.entries(req.body).forEach(item => {
+      const key = item[0];
+      const value = item[1];
+      user[key] = value;
+    });
+
+    req.user.save((err) => {
+      if(err) {
+        return res.send(err);
+      }
+      return res.json(user);
+    })
+  })
+
+  // Delete profile
+  router.delete('/delete', (req, res) => {
+        req.user.remove((err) => {
+          if(err){
+            return res.send(err);
+          }
+          // Return success code - 204
+          return res.sendStatus(204);
+        })
+      })
+
  // User profile
  router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   res.json({user: req.user});
 });
 
 
+/**
+ * THE FOLLOWING IS NOT FOR PRODUCTION. ONLY FOR ASSESSOR FOR ASSEMENT PURPOSES - INCLUDES Update and Delete routes
+ * 
+ */
 // // Import libs
 // const express = require('express');
 // const userController = require('../controllers/userController');

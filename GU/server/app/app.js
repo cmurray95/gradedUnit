@@ -37,6 +37,10 @@ app.use(passport.session());
 // Initialize routes
 app.use('/users', users);
 
+// Set unauthorized API redirects
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+})
 // Define port ***4000***
 const port = process.env.PORT || 4000;
 
